@@ -1,5 +1,6 @@
 package cars.carbon.printService.model;
 
+import cars.carbon.printService.model.WorkOrders.Plates;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -7,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Workorder_table")
@@ -20,10 +23,16 @@ public class WorkOrder {
     private LocalDateTime changeDate;
     private String lote;
     private Long platesQuantity;
+    @OneToMany(mappedBy = "workorderid", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Plates> plates = new ArrayList<>();
     private String enfestoType;//must be a relation in database with products entity
     private String filmeTye;//must be a relation in database with products entity
+    private Long platesLayres;
 
-    public WorkOrder(String enfestoType, Long id, LocalDateTime creationDate, LocalDateTime changeDate, String lote, Long platesQuantity, String filmeTye) {
+    @Deprecated
+    public WorkOrder() {}
+
+    public WorkOrder(String enfestoType, Long id, LocalDateTime creationDate, LocalDateTime changeDate, String lote, Long platesQuantity, String filmeTye, Long platesLayres) {
         this.enfestoType = enfestoType;
         this.id = id;
         this.creationDate = creationDate;
@@ -31,6 +40,7 @@ public class WorkOrder {
         this.lote = lote;
         this.platesQuantity = platesQuantity;
         this.filmeTye = filmeTye;
+        this.platesLayres = platesLayres;
     }
 
     public String getFilmeTye() {
@@ -85,7 +95,16 @@ public class WorkOrder {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getPlatesLayres() {
+        return platesLayres;
+    }
+
+    public void setPlatesLayres(Long platesLayres) {
+        this.platesLayres = platesLayres;
+    }
+
+    public void setPlates(List<Plates> plates) {
+        this.plates.clear();
+        this.plates.addAll(plates);
     }
 }

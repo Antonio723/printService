@@ -12,12 +12,63 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<parameter name="otid" class="java.lang.Long"/>
 	<queryString language="SQL">
-		<![CDATA[select 1 as result]]>
+		<![CDATA[select * from workorder_table wo
+inner join plates p
+on p.workorder_id = wo.id
+where wo.id =  $P{otid} 
+order by p.workorder_id, p.plate_sequence]]>
 	</queryString>
-	<field name="result" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="result"/>
-		<property name="com.jaspersoft.studio.field.label" value="result"/>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="change_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="change_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="change_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="creation_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="creation_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="creation_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="enfesto_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="enfesto_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="enfesto_type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="filme_tye" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="filme_tye"/>
+		<property name="com.jaspersoft.studio.field.label" value="filme_tye"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="lote" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="lote"/>
+		<property name="com.jaspersoft.studio.field.label" value="lote"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="plates_quantity" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="plates_quantity"/>
+		<property name="com.jaspersoft.studio.field.label" value="plates_quantity"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="workorder_table"/>
+	</field>
+	<field name="COLUMN_8" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="plates"/>
+	</field>
+	<field name="plate_sequence" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="plate_sequence"/>
+		<property name="com.jaspersoft.studio.field.label" value="plate_sequence"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="plates"/>
+	</field>
+	<field name="workorder_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="workorder_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="workorder_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="plates"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -25,13 +76,13 @@
 	<detail>
 		<band height="113" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="59" width="274" height="16" uuid="eb4e88ca-9f00-4640-8e44-8836f38dbc2f"/>
+				<reportElement x="0" y="27" width="274" height="16" uuid="eb4e88ca-9f00-4640-8e44-8836f38dbc2f"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="44" width="274" height="15" uuid="2fafc2d0-db71-4368-90b7-7eea9bb6487e"/>
+				<reportElement x="0" y="43" width="274" height="15" uuid="2fafc2d0-db71-4368-90b7-7eea9bb6487e"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="29" width="274" height="15" uuid="3a43cc1b-6b74-4fcd-a2a6-15525d530fc1">
+				<reportElement x="0" y="58" width="274" height="15" uuid="3a43cc1b-6b74-4fcd-a2a6-15525d530fc1">
 					<property name="com.jaspersoft.studio.unit.width" value="mm"/>
 				</reportElement>
 			</rectangle>
@@ -48,10 +99,10 @@
 					<property name="com.jaspersoft.studio.unit.width" value="mm"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA["MATERIAL: ARABLACK TEC- 120 AS"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["MATERIAL: ARABLACK COM IMP"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="14" width="70" height="14" uuid="502779b4-2a77-447b-b9e5-c580cc0f3cfa"/>
+				<reportElement x="2" y="14" width="70" height="14" uuid="502779b4-2a77-447b-b9e5-c580cc0f3cfa"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA["PROCESSO: "]]></textFieldExpression>
 			</textField>
@@ -65,27 +116,22 @@
 				<reportElement x="100" y="15" width="10" height="11" uuid="518af3ea-6c31-4233-be7d-eb62a1378e63"/>
 			</rectangle>
 			<textField>
-				<reportElement x="170" y="15" width="40" height="14" uuid="00373020-429e-43ff-b034-962dae144171"/>
+				<reportElement x="2" y="59" width="143" height="14" uuid="4f1d02c1-e69d-4985-9e82-d52342b45640"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["DATA: "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["FILME: "+$F{filme_tye}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="29" width="50" height="14" uuid="4f1d02c1-e69d-4985-9e82-d52342b45640"/>
-				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["FILME: "]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="44" width="50" height="14" uuid="da5ccb48-d606-4b43-8cee-d6f768b75a87"/>
+				<reportElement x="3" y="44" width="50" height="14" uuid="da5ccb48-d606-4b43-8cee-d6f768b75a87"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA["TECIDO: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="60" width="80" height="14" uuid="5d52e6cb-0a90-41df-9bf7-fa7b57a86422"/>
+				<reportElement x="3" y="29" width="80" height="14" uuid="5d52e6cb-0a90-41df-9bf7-fa7b57a86422"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["RESPOSÁVEL: "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["LOTE: "+$F{lote}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="144" y="29" width="50" height="14" uuid="8137a07f-82b6-485c-9c8d-0c2c16a812de"/>
+				<reportElement x="144" y="59" width="50" height="14" uuid="8137a07f-82b6-485c-9c8d-0c2c16a812de"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA["LOTE: "]]></textFieldExpression>
 			</textField>
@@ -95,15 +141,15 @@
 				<textFieldExpression><![CDATA["LOTE: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="202" y="60" width="72" height="14" uuid="5cac5e0e-bb1b-49b6-ae22-e168a943da7a"/>
+				<reportElement x="195" y="29" width="79" height="14" uuid="5cac5e0e-bb1b-49b6-ae22-e168a943da7a"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["PLACA: "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PLACA: "+$F{plates_quantity}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="75" width="274" height="38" uuid="bcc664a5-124a-4abc-a58e-5cc5d2705a0c"/>
+				<reportElement x="0" y="73" width="274" height="38" uuid="bcc664a5-124a-4abc-a58e-5cc5d2705a0c"/>
 			</rectangle>
 			<textField>
-				<reportElement x="0" y="76" width="90" height="14" uuid="8ae83db8-4dcd-4dcf-b25e-e2cb289e5aef"/>
+				<reportElement x="2" y="75" width="90" height="14" uuid="8ae83db8-4dcd-4dcf-b25e-e2cb289e5aef"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA["OBSERVAÇÕES: "]]></textFieldExpression>
 			</textField>
@@ -122,6 +168,16 @@
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[A]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="195" y="13" width="79" height="14" uuid="38347d53-a977-4b90-9d8a-ec7302c324f3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["OT: "+$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="29" width="79" height="14" uuid="b0cb59c6-c307-4f53-bad6-663c965e8c25"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["NF: "]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

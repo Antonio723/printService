@@ -14,11 +14,16 @@ public class ReportController {
     }
 
     @GetMapping("/etiqueta")
-    public void gerarEtiqueta(@RequestParam String codigo, HttpServletResponse response) throws Exception {
-        byte[] pdf = etiquetaService.gerarEtiqueta(codigo);
+    public void gerarEtiqueta(@RequestParam Long otid, HttpServletResponse response) throws Exception {
+        byte[] pdf = etiquetaService.gerarEtiqueta(otid);
 
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "inline; filename=etiqueta.pdf");
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("X-Frame-Options", "ALLOWALL");
+
         response.getOutputStream().write(pdf);
+        response.getOutputStream().flush();
     }
 }

@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # ou validate / create / create-drop dependendo do que voc� quer
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # Opcional, para ver queries no console
+  jpa.show-sql: true
+  jpa.properties.hibernate.format_sql: true
